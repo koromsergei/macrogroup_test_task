@@ -45,7 +45,7 @@ class Settings
 	
 	int setIniFile(string upd_input_pipeline, vector<float> upd_confidence, vector<vector<vector<float>>> upd_anchors)
 	{
-		//inipp::Ini<char> ini;
+		inipp::Ini<char> ini;
 
 		ifstream fin;
 		ofstream fout;
@@ -86,13 +86,13 @@ int main()
 	a.readIniFile();
 
 
-	cout << "_________________________" << endl;
+	//cout << "_________________________" << endl;
 	cout << a.input_pipeline << endl;
-	copy(a.confidence.begin(), a.confidence.end(), std::ostream_iterator<float>(std::cout, " "));
-	cout << endl;
+	//copy(a.confidence.begin(), a.confidence.end(), std::ostream_iterator<float>(std::cout, " "));
+	//cout << endl;
 	cout << typeid(a.input_pipeline).name() << endl;
-	cout << typeid(a.anchors).name() << endl;
-	
+	//cout << typeid(a.anchors).name() << endl;
+		
 
 
 	return 0;
