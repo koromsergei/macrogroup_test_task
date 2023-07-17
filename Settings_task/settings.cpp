@@ -4,8 +4,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include "ini.h"
-#include "INIReader.h"
+//#include "ini.h"
+//#include "INIReader.h"
 #include <fstream>
 #include "inipp.h"
 #include <typeinfo>
@@ -28,16 +28,10 @@ class Settings
 	int readIniFile()
 	{	
 		inipp::Ini<char> ini;
-	
-		ifstream is("test.ini");
-
-		ini.parse(is);
-
+		//INIReader reader("test.ini");
+		
 		inipp::get_value(ini.sections[""], "input_pipeline", input_pipeline);
 		inipp::get_value(ini.sections[""], "confidence", confidence);
-		inipp::get_value(ini.sections[""], "anchors", anchors);
-				
-		input_pipeline = input_pipeline.substr(1, input_pipeline.length() - 1);
 
 		return 0;
 	}
@@ -45,7 +39,7 @@ class Settings
 	
 	int setIniFile(string upd_input_pipeline, vector<float> upd_confidence, vector<vector<vector<float>>> upd_anchors)
 	{
-		inipp::Ini<char> ini;
+		//inipp::Ini<char> ini;
 
 		ifstream fin;
 		ofstream fout;
@@ -87,13 +81,11 @@ int main()
 
 
 	//cout << "_________________________" << endl;
-	cout << a.input_pipeline << endl;
+	//cout << a.input_pipeline << endl;
 	//copy(a.confidence.begin(), a.confidence.end(), std::ostream_iterator<float>(std::cout, " "));
 	//cout << endl;
-	cout << typeid(a.input_pipeline).name() << endl;
+	//cout << typeid(a.input_pipeline).name() << endl;
 	//cout << typeid(a.anchors).name() << endl;
 		
-
-
 	return 0;
 }

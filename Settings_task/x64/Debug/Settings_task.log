@@ -84,12 +84,12 @@ C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\inipp.h(105,9): 
           [
               T=std::vector<float,std::allocator<float>>
           ]
-C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\inipp.h(110,9): message : выполняется компиляция ссылки на экземпляр шаблон функции "bool inipp::get_value<char,T>(const std::map<std::string,std::string,std::less<std::string>,std::allocator<std::pair<const std::string,std::string>>> &,const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &,T &)"
+C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\inipp.h(110,9): message : выполняется компиляция ссылки на экземпляр шаблон функции "bool inipp::get_value<char,T>(const std::map<std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::less<std::basic_string<char,std::char_traits<char>,std::allocator<char>>>,std::allocator<std::pair<const std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::basic_string<char,std::char_traits<char>,std::allocator<char>>>>> &,const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &,T &)"
           with
           [
               T=std::vector<float,std::allocator<float>>
           ]
-C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\settings.cpp(37,10): message : выполняется компиляция ссылки на экземпляр шаблон функции "bool inipp::get_value<char,std::vector<float,std::allocator<float>>>(const std::map<std::string,std::string,std::less<std::string>,std::allocator<std::pair<const std::string,std::string>>> &,const CharT *,T &)"
+C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\settings.cpp(34,10): message : выполняется компиляция ссылки на экземпляр шаблон функции "bool inipp::get_value<char,std::vector<float,std::allocator<float>>>(const std::map<std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::less<std::basic_string<char,std::char_traits<char>,std::allocator<char>>>,std::allocator<std::pair<const std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::basic_string<char,std::char_traits<char>,std::allocator<char>>>>> &,const CharT *,T &)"
           with
           [
               CharT=char,
