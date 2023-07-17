@@ -31,7 +31,9 @@ class Settings
 		inipp::Ini<char> ini;
 		vector<vector<float>> anchors_unwrapped;
 
-		const char delim = ', ';
+
+
+		const char delim = '},{';
 
 		ifstream is("test.ini");
 
@@ -41,6 +43,12 @@ class Settings
 		inipp::get_value(ini.sections[""], "confidence", temp_con);
 		inipp::get_value(ini.sections[""], "anchors", temp_anc);
 		
+
+		
+		// input_pipeline
+		input_pipeline = input_pipeline.substr(1, input_pipeline.length() - 1);
+
+
 		// confidence
 		confidence = toVector(temp_con);
 
@@ -50,14 +58,9 @@ class Settings
 
 		while (getline(ss, temp_anc_str, delim))
 		{
-
-			anchors.push_back(toVectortwice(temp_anc_str));
+			cout << temp_anc_str << endl;
+			//anchors.push_back(toVectortwice(temp_anc_str));
 		}
-
-	
-
-
-
 		return 0;
 	}
 
@@ -65,13 +68,28 @@ class Settings
 	vector<float> toVector(string vec_str)
 	{	
 		vector<float> temp_vec;
+		vec_str = vec_str.substr(1, vec_str.length() - 1);
 
-		istringstream iss(temp_con);
+		istringstream iss(vec_str);
 		string buf;
 
 		while (iss >> buf)
 			temp_vec.push_back(atof(buf.c_str()));
+		
+		/*
+				stringstream ss(vec_str);
+		string temp_anc_str;
+		const char delim = ', ';
+
+		while (getline(ss, temp_anc_str, delim))
+		{
+			temp_vec2.push_back(stof(temp_anc_str));
+		}
+
+		*/
+		
 		return temp_vec;
+
 	}
 
 
@@ -81,13 +99,17 @@ class Settings
 
 		temp_vec.push_back(toVector(vec_str));
 		
-
-		for (const std::vector<float>& v : temp_vec)
+		/*
+				for (const std::vector<float>& v : temp_vec)
 		{
 			for (float x : v) std::cout << x << ' ';
 			std::cout << std::endl;
 		}
+		
+		*/
+
 		return temp_vec;
+	
 	}
 
 
@@ -134,8 +156,16 @@ int main()
 {
 	Settings a;
 	a.readIniFile();
+
+
+	cout << "_________________________" << endl;
 	cout << a.input_pipeline << endl;
-	cout << a.temp_con << endl;
-	cout << a.temp_anc << endl;
+	copy(a.confidence.begin(), a.confidence.end(), std::ostream_iterator<float>(std::cout, " "));
+	cout << endl;
+	cout << typeid(a.input_pipeline).name() << endl;
+	cout << typeid(a.anchors).name() << endl;
+	
+
+
 	return 0;
 }
