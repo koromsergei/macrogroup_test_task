@@ -1,2 +1,9 @@
 ﻿  settings.cpp
+C:\Users\sergej.koromyslov\PycharmProjects\macrogroup_test_task\Settings_task\settings.cpp(34,22): warning C4305: инициализация: усечение из "int" в "char"
+C:\Users\sergej.koromyslov\PycharmProjects\macrogroup_test_task\Settings_task\settings.cpp(34,22): warning C4309: инициализация: усечение константного значения
+C:\Users\sergej.koromyslov\PycharmProjects\macrogroup_test_task\Settings_task\settings.cpp(73,27): warning C4244: аргумент: преобразование "double" в "_Ty", возможна потеря данных
+          with
+          [
+              _Ty=float
+          ]
   Settings_task.vcxproj -> C:\Users\sergej.koromyslov\PycharmProjects\macrogroup_test_task\Settings_task\x64\Debug\Settings_task.exe
