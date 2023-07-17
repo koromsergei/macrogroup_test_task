@@ -38,7 +38,7 @@ class Settings
 		ini.parse(is);
 
 		inipp::get_value(ini.sections[""], "input_pipeline", input_pipeline);
-		inipp::get_value(ini.sections[""], "confidence", temp_con);
+		inipp::get_value(ini.sections[""], "confidence", confidence);
 		inipp::get_value(ini.sections[""], "anchors", temp_anc);
 		
 		// confidence
