@@ -75,11 +75,6 @@ class Settings
 	}
 
 
-
-
-
-
-
 	vector<vector<float>> toVectortwice(string vec_str)
 	{
 		vector<vector<float>> temp_vec;
@@ -139,10 +134,8 @@ int main()
 {
 	Settings a;
 	a.readIniFile();
-
 	cout << a.input_pipeline << endl;
-	copy(a.confidence.begin(), a.confidence.end(), ostream_iterator<float>(cout, " "));
-	cout <<  endl;
-
+	cout << a.temp_con << endl;
+	cout << a.temp_anc << endl;
 	return 0;
 }
