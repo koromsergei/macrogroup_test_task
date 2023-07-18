@@ -13,6 +13,7 @@
 #include <cassert>
 #include <stack>
 #include <sstream>
+
 using namespace std;
 
 
@@ -32,8 +33,6 @@ class Settings
 		inipp::Ini<char> ini;
 		vector<vector<float>> anchors_unwrapped;
 
-		const char delim = '}},{';
-
 		ifstream is("test.ini");
 
 		ini.parse(is);
@@ -50,18 +49,8 @@ class Settings
 
 		//anchors
 		temp_anc = temp_anc.substr(1, temp_anc.length() - 2);
-		cout << temp_anc << endl;
+		//cout << temp_anc << endl;
 
-		/*
-				stringstream ss(temp_anc);
-		string temp_anc_str;
-
-		while (getline(ss, temp_anc_str, delim))
-		{
-			cout << temp_anc_str ;
-			anchors.push_back(toVectortwice(temp_anc_str));
-		}
-		*/
 
 
 		int first_index = 0;
@@ -77,6 +66,7 @@ class Settings
 				{
 					
 					first_index = i - 1;
+
 					//cout << first_index << endl;
 				}
 			}
@@ -89,15 +79,15 @@ class Settings
 					
 					last_index = i + 1;
 					//cout << last_index << endl;
-					//anchors.push_back(toVectortwice(temp_anc.substr(first_index, last_index)));
-					cout << temp_anc.substr(first_index, last_index) << endl;
+					anchors.push_back(toVectortwice(temp_anc.substr(first_index, last_index - first_index)));
+					//cout << temp_anc.substr(first_index, last_index - first_index) << endl;
 				}
 			}
 
 
 		}
 
-		vector<vector<float>> a = toVectortwice("{{1, 2}, {3, 4}, {5, 6}}");
+		//vector<vector<float>> a = toVectortwice("{{1, 2}, {3, 4}, {5, 6}}");
 
 		return 0;
 	}
@@ -106,15 +96,16 @@ class Settings
 	vector<float> toVector(string vec_str)
 	{	
 		vector<float> temp_vec;
-		cout << vec_str << endl;
+		//cout << vec_str << endl;
 		vec_str = vec_str.substr(1, vec_str.length() - 2);
+		cout << vec_str << endl;
 		
 		const char delim = ',';
 		istringstream iss(vec_str);
 		string temp_str;
 
 		while (getline(iss, temp_str, delim))
-		{
+		{	
 			temp_vec.push_back(stof(temp_str));
 		}
 		
@@ -127,41 +118,60 @@ class Settings
 	vector<vector<float>> toVectortwice(string vec_str)
 	{
 		vector<vector<float>> temp_vec;
-		vec_str = vec_str.substr(1, vec_str.length() - 2);
-		cout << vec_str << endl;
-		const char delim = '}, {';
-		
-		istringstream iss(vec_str);
-		string temp_str;
-		while (getline(iss, temp_str, delim))
-		{
-			cout << temp_str << endl;
-			temp_vec.push_back(toVector(temp_str));
-			
-		}
 
+		vec_str = vec_str.substr(1, vec_str.length() - 2);
+		//cout << vec_str << endl;
+
+		//cout << "___________________" << endl;
 		int first_index = 0;
 		int last_index = 0;
 
-
-
-		
-		/*
-				for (const std::vector<float>& v : temp_vec)
+		for (int i = 0; i < vec_str.size(); ++i)
 		{
-			for (float x : v) std::cout << x << ' ';
-			std::cout << std::endl;
+			if (vec_str[i] == '{')
+			{
+
+				first_index = i;
+			}
+
+			if (vec_str[i] == '}')
+			{
+
+				last_index = i + 1;
+				temp_vec.push_back(toVector(vec_str.substr(first_index, last_index - first_index)));
+				//cout << vec_str.substr(first_index, last_index - first_index) << endl;
+			}
+
 		}
+
+		/*
+		
+					for (const std::vector<float>& v : temp_vec)
+			{
+				for (float x : v) std::cout << x << ' ';
+				std::cout << std::endl;
+			}
+		
+		
 		*/
 
-		return temp_vec;
+			return temp_vec;
+
+		
 	}
 
-
 	
-	void setIniFile()
+	int setIniFile(string upd_input_pipeline, vector<float> upd_confidence, vector<vector<vector<float>>> upd_anchors)
 	{
-		/*добавить проверку на существование файлов*/
+				
+		
+
+		std::ostringstream oss;
+		std::copy(upd_confidence.begin(), upd_confidence.end(), std::ostream_iterator<float>(oss, ", "));
+		string str_upd_confidence = oss.str();
+		
+
+
 		ifstream fin;
 		ofstream fout;
 
@@ -174,10 +184,10 @@ class Settings
 			fout.open("test.ini.backup");
 
 
-			string i;
-			while (fin >> i)
+			string s;
+			while (getline(fin, s))
 			{
-				fout << i;
+				fout << s<< endl;
 		
 			}
 		}
@@ -189,11 +199,55 @@ class Settings
 		
 		fin.close();
 		fout.close();
+
+		// update test.ini
+
+		ofstream out("test.ini");
+
+		if (out.is_open())
+		{
+			out << "input_pipeline=" << "\"" << upd_input_pipeline << "\"" << endl;
+			out << "confidence="<< "{" << str_upd_confidence << "}" << endl;
+
+			string second_anch;
+			string third_anch;
+
+			for (int i = 0; i < upd_anchors.size(); i++) {
+
+
+				for (int j = 0; j < upd_anchors[i].size(); j++)
+				{
+					std::ostringstream oss;
+					std::copy(upd_anchors[i][j].begin(), upd_anchors[i][j].end(), std::ostream_iterator<float>(oss, ", "));
+					second_anch.append("{");
+					second_anch.append(oss.str());
+					second_anch.append("}, ");
+					//cout << second_anch << endl;
+				}
+				third_anch.append("{");
+				third_anch.append(second_anch);
+				third_anch.append("}, ");
+				cout << third_anch << endl;
+				second_anch = "";
+			
+			}
+			out << "anchors=" << "{" << third_anch << "}" << endl;
+			third_anch = "";
+			//out << "anchors="<< VectorToString(upd_anchors) << endl;
+		}
+		out.close();
 		
 
+		
+
+		return 0;
 	}
 
-
+	string VectorToString(vector<vector<vector<float>>> upd_anchors)
+		{
+			string a = "dsa";
+			return a;
+		}
 };
 
 
@@ -201,10 +255,18 @@ int main()
 {
 	Settings a;
 	a.readIniFile();
-
+	cout << "_____________input_pipeline_____________________" << endl;
 	cout << a.input_pipeline << endl;
-	//copy(a.confidence.begin(), a.confidence.end(), ostream_iterator<float>(cout, ", "));
-	cout <<  endl;
+	cout << "_____________confidence_____________________" << endl;
+	a.setIniFile("sadasd", {1.1, 1.3}, { {{1, 2}, {3, 4}, {5, 6}},{{7, 8}, {9, 10}, {11, 12}} });
+	//std::ostringstream oss;
+	std::copy(a.confidence.begin(), a.confidence.end(), std::ostream_iterator<float>(cout, ", "));
+	//cout << a.anchors.size() << endl;
+	//string str_upd_confidence = oss.str();
+	//cout << str_upd_confidence << endl;
+
+
+
 
 
 	return 0;

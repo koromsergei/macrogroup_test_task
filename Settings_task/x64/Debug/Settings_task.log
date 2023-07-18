@@ -1,6 +1,12 @@
 ﻿  settings.cpp
-C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\settings.cpp(35,22): warning C4305: инициализация: усечение из "int" в "char"
-C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\settings.cpp(35,22): warning C4309: инициализация: усечение константного значения
-C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\settings.cpp(132,22): warning C4305: инициализация: усечение из "int" в "char"
-C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\settings.cpp(132,22): warning C4309: инициализация: усечение константного значения
+C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\settings.cpp(261,26): warning C4305: инициализация: усечение из "double" в "_Ty"
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\settings.cpp(261,31): warning C4305: инициализация: усечение из "double" в "_Ty"
+          with
+          [
+              _Ty=float
+          ]
   Settings_task.vcxproj -> C:\Users\korom\Documents\Git\macrogroup_test_task\Settings_task\x64\Debug\Settings_task.exe
