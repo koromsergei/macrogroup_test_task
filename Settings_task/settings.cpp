@@ -18,7 +18,7 @@ using namespace std;
 
 class Settings
 {
-	public:
+	private:
 		string input_pipeline;
 		vector<float> confidence;
 		vector<vector<vector<float>>> anchors;
@@ -26,7 +26,8 @@ class Settings
 
 		string temp_con;
 		string temp_anc;
-
+	
+	public:
 	int readIniFile()
 	{	
 		inipp::Ini<char> ini;
@@ -134,17 +135,6 @@ class Settings
 
 		}
 
-		/*
-		
-					for (const std::vector<float>& v : temp_vec)
-			{
-				for (float x : v) std::cout << x << ' ';
-				std::cout << std::endl;
-			}
-		
-		
-		*/
-
 			return temp_vec;
 
 		
@@ -243,11 +233,6 @@ class Settings
 		return 0;
 	}
 
-	string VectorToString(vector<vector<vector<float>>> upd_anchors)
-		{
-			string a = "dsa";
-			return a;
-		}
 };
 
 
@@ -255,11 +240,6 @@ int main()
 {
 	Settings a;
 	a.readIniFile();
-	cout << a.input_pipeline << endl;
-	std::copy(a.confidence.begin(), prev(a.confidence.end()), std::ostream_iterator<float>(cout, ", "));
-	if (!a.confidence.empty()) {
-		std::cout << a.confidence.back();
-	}
 	a.setIniFile("test", {1.1, 1.3}, { {{1, 2}, {3, 4}, {5, 6}},{{7, 8}, {9, 10}, {11, 12}} });
 	return 0;
 }
