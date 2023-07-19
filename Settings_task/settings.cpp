@@ -165,12 +165,8 @@ class Settings
 		string str_upd_confidence = oss.str();
 		
 
-
 		ifstream fin;
 		ofstream fout;
-
-		fin.exceptions(ifstream::badbit | ifstream::failbit);
-		fout.exceptions(ofstream::badbit | ofstream::failbit);
 
 		try
 		{
@@ -181,16 +177,17 @@ class Settings
 			string s;
 			while (getline(fin, s))
 			{
-				fout << s<< endl;
-		
+				fout << s << endl;
 			}
 		}
 
-		catch (const ifstream::failure & ex)
+		catch (const ifstream::failure& ex)
 		{
 			cout << ex.what() << endl;
-			cout << "HELOO" << endl;
 		}
+
+
+
 		
 		fin.close();
 		fout.close();
