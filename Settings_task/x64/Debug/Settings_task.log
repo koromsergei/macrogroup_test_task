@@ -1,10 +1,10 @@
 ﻿  settings.cpp
-C:\Users\sergej.koromyslov\PycharmProjects\macrogroup_test_task\Settings_task\settings.cpp(264,24): warning C4305: инициализация: усечение из "double" в "_Ty"
+C:\Users\sergej.koromyslov\PycharmProjects\macrogroup_test_task\Settings_task\settings.cpp(263,24): warning C4305: инициализация: усечение из "double" в "_Ty"
           with
           [
               _Ty=float
           ]
-C:\Users\sergej.koromyslov\PycharmProjects\macrogroup_test_task\Settings_task\settings.cpp(264,29): warning C4305: инициализация: усечение из "double" в "_Ty"
+C:\Users\sergej.koromyslov\PycharmProjects\macrogroup_test_task\Settings_task\settings.cpp(263,29): warning C4305: инициализация: усечение из "double" в "_Ty"
           with
           [
               _Ty=float

@@ -4,8 +4,6 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-//#include "ini.h"
-//#include "INIReader.h"
 #include <fstream>
 #include "inipp.h"
 #include <typeinfo>
@@ -26,6 +24,8 @@ class Settings
 		vector<vector<vector<float>>> anchors;
 
 
+		string temp_con;
+		string temp_anc;
 
 	int readIniFile()
 	{	
